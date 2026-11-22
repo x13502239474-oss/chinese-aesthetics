@@ -95,14 +95,14 @@ function viewHome(){
     <b>About this digital academy｜</b>这里没有测验、打卡与积分。你可以顺着思想史的脉络长期阅读，用收藏、书签和自动保存的阅读位置，把书读到自己心里去。
   </div>
 
-  <div class="sec-title"><span class="num">壹</span><h2>课程模块</h2><div class="line"></div><span class="more">共 ${mods.length} 模块 · ${allLessons().length} 课 · 样章 ${readyCount} 课</span></div>
+  <div class="sec-title"><span class="num">壹</span><h2>课程模块</h2><div class="line"></div><span class="more">共 ${mods.length} 模块 · ${allLessons().length} 课 · 正文 ${readyCount} 课</span></div>
   <div class="module-grid">
     ${mods.map(m=>`
       <a class="module-card" href="#/module/${m.id}">
         <div class="m-top"><span class="m-no">MODULE ${String(m.no).padStart(2,'0')}</span><span class="m-era">${esc(m.era)}</span></div>
         <h3>${esc(m.title)}</h3>
         <p class="m-sum">${esc(m.summary)}</p>
-        <div class="m-foot"><span>${m.lessons.length} 课</span><span class="${m.lessons.some(l=>l.status==='ready')?'ready':''}">${m.lessons.some(l=>l.status==='ready')?'● 含样章':'待续写'}</span></div>
+        <div class="m-foot"><span>${m.lessons.length} 课</span><span class="${m.lessons.every(l=>l.status==='ready')?'ready':''}">${m.lessons.every(l=>l.status==='ready')?'● 正文齐备':'部分待续'}</span></div>
       </a>`).join('')}
   </div>
 
@@ -162,7 +162,7 @@ function viewModule(id){
         <div class="li-sum">${esc(l.summary)}</div>
         <div class="li-sum" style="color:var(--bronze)">依据：${l.sources.map(esc).join(' · ')}</div>
       </div>
-      <span class="li-badge ${l.status==='ready'?'':'plan'}">${l.status==='ready'?'样章':'待续'}</span>
+      <span class="li-badge ${l.status==='ready'?'':'plan'}">${l.status==='ready'?'正文':'待续'}</span>
       <span class="li-arrow">›</span>
     </div>`).join('')}
   <div class="lesson-nav"><a href="#/home"><div class="nav-dir">← 返回</div><div class="nav-title">书院首页</div></a></div>
